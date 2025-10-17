@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, createContext } from "react";
+import { Person, Comment } from "./components/Person";
+//fc -->functional component
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//useContext
+interface AppContextInterface {
+  author: string;
+  ages: number;
+ 
 }
+
+ export const AppContext = createContext<AppContextInterface |
+ null>(null);
+
+const App: FC = () => {
+
+  const contextValue: AppContextInterface = {
+    author: "Daniel",
+    ages: 28,
+    
+  };
+
+  return (
+    <AppContext.Provider value={contextValue}>
+    <div>
+      <Person name="Rajal" age={29} email="banana" comment={Comment.second} />
+    </div>
+    </AppContext.Provider>
+  );
+};
 
 export default App;
